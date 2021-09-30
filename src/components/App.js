@@ -19,16 +19,22 @@ class App extends Component {
   addContact = (contact) => {
     const id = uuidv4();
     if (
-      this.state.contacts.map((item) =>
-        item.name.toLowerCase()) === contact.name.toLowerCase()
-      
+      this.state.contacts
+        .map((item) => item.name.toLowerCase())
+        .includes(contact.name.toLowerCase())
     ) {
       return alert(`${contact.name} is already in contacts.`);
-    } else {
-      this.setState((prev) => ({
-        contacts: [...prev.contacts, { ...contact, id }],
-      }));
     }
+    this.setState((prev) => ({
+      contacts: [...prev.contacts, { ...contact, id }],
+    }));
+  };
+
+  deleteContact = (e) => {
+    const { id } = e.target
+    this.setState((prev) => ({
+      contacts: [...prev.contacts.filter((contact) => contact.id !== id)],
+    }));
   };
 
   getFilteredContacts = () =>
@@ -49,7 +55,10 @@ class App extends Component {
         </Section>
         <Section title={"Contacts"}>
           <Filter setFilter={this.setFilter} filter={this.state.filter} />
-          <ContactList contacts={this.getFilteredContacts()} />
+          <ContactList
+            contacts={this.getFilteredContacts()}
+            deleteContact={this.deleteContact}
+          />
         </Section>
       </>
     );

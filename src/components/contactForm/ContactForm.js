@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {form, addBtn, label, input} from './ContactForm.module.css'
 
 class ContactForm extends Component {
   state = {
@@ -24,10 +25,11 @@ class ContactForm extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.onHandleSubmit}>
-          <label>
+        <form onSubmit={this.onHandleSubmit} className={form}>
+          <label className={label}>
             Name
             <input
+              className={input}
               type="text"
               onChange={this.onHandleChange}
               value={this.state.name}
@@ -38,6 +40,7 @@ class ContactForm extends Component {
           <label>
             Number
             <input
+              className={input}
               type="text"
               onChange={this.onHandleChange}
               value={this.state.number}
@@ -46,7 +49,9 @@ class ContactForm extends Component {
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             />
           </label>
-          <button type="submit">Add contact</button>
+          <button type="submit" className={input}>
+            Add contact
+          </button>
         </form>
       </>
     );
