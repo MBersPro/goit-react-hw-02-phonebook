@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {form, addBtn, label, input} from './ContactForm.module.css'
+import {form, label, input} from './ContactForm.module.css'
 
 class ContactForm extends Component {
   state = {

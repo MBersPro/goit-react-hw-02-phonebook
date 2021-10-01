@@ -19,9 +19,9 @@ class App extends Component {
   addContact = (contact) => {
     const id = uuidv4();
     if (
-      this.state.contacts
-        .map((item) => item.name.toLowerCase())
-        .includes(contact.name.toLowerCase())
+      this.state.contacts.some(
+        (item) => item.name.toLowerCase() === contact.name.toLowerCase()
+      )
     ) {
       return alert(`${contact.name} is already in contacts.`);
     }
@@ -29,6 +29,8 @@ class App extends Component {
       contacts: [...prev.contacts, { ...contact, id }],
     }));
   };
+
+   
 
   deleteContact = (e) => {
     const { id } = e.target
